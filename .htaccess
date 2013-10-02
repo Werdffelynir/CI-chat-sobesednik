@@ -1,0 +1,18 @@
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+
+    # Убрать index.php с URL и создать перенаправление, скрыть настоящую ссылку "upload/files/__file__" на "download/__file__"
+
+	RewriteEngine On
+    
+	RewriteBase /sobesednik/
+    
+    Options +FollowSymlinks
+    RewriteRule ^download/(.*)$ upload/files/$1 [L]
+    
+    RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ index.php/$1 [L]
+
+</IfModule>
